@@ -11,8 +11,11 @@ helmDefaults:
   # keep it uninstalled if you don't have it already installed.
   #
   # For more information, reference the Helmfile repository at:
-  # https://github.com/roboll/helmfile
+  # https://github.com/helmfile/helmfile
   # ------------------------------------------------------------
 
 helmfiles:
   - path: applications/ingress-nginx/helmfile.yaml
+  - path: applications/whoami/helmfile.yaml
+    values:
+    - installed: true

@@ -2,13 +2,10 @@
 rbac:
   create: true
 
-namespaceOverride: ingress-nginx
-fullnameOverride: ingress-nginx
-
 controller:
   ingressClassResource:
-    name: ingress-nginx
-  ingressClass: ingress-nginx
+    name: nginx
+  ingressClass: nginx
   kind: DaemonSet
   daemonset:
     useHostNetwork: true

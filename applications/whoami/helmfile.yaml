@@ -1,0 +1,7 @@
+bases:
+- environments.yaml
+---
+releases:
+  - name: whoami
+    chart: ../../helm/whoami
+    installed: {{ .Values.installed }}
