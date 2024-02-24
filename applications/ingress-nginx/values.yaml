@@ -1,0 +1,38 @@
+---
+rbac:
+  create: true
+
+namespaceOverride: ingress-nginx
+fullnameOverride: ingress-nginx
+
+controller:
+  ingressClassResource:
+    name: ingress-nginx
+  ingressClass: ingress-nginx
+  kind: DaemonSet
+  daemonset:
+    useHostNetwork: true
+    useHostPort: true
+  hostPort:
+    enabled: true
+  service:
+    enabled: true
+    type: NodePort
+  dnsPolicy: ClusterFirstWithHostNet
+  metrics:
+    enabled: false
+    serviceMonitor:
+      enabled: false
+  config:
+    use-forwarded-headers: "true"
+  nodeSelector:
+    ingress: "true"
+  admissionWebhooks:
+    patch:
+      ingress: "true"
+    nodeSelector:
+      ingress: "true"
+
+defaultBackend:
+  nodeSelector:
+    ingress: "true"

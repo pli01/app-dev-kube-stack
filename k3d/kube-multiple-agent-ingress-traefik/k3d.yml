@@ -1,0 +1,37 @@
+# k3d configuration file, saved as e.g. /home/me/k3d.yml
+#    k3d cluster create --config ./k3d.yml
+#
+apiVersion: k3d.io/v1alpha5 # this will change in the future as we make everything more stable
+kind: Simple # internally, we also have a Cluster config, which is not yet available externally
+metadata:
+  name: devcluster # name that you want to give to your cluster (will still be prefixed with `k3d-`)
+servers: 1 # same as `--servers 1`
+agents: 2 # same as `--agents 2`
+ports:
+  - port: 8080:80 # same as `--port '8080:80@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 8443:443
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d: # k3d runtime settings
+    wait: true # wait for cluster to be usable before returning; same as `--wait` (default: true)
+  k3s: # options passed on to K3s itself
+#    extraArgs: # additional arguments passed to the `k3s server|agent` command; same as `--k3s-arg`
+#      - arg: "--disable=traefik"
+#        nodeFilters:
+#          - server:0
+#      - arg: "--disable=servicelb"
+#        nodeFilters:
+#          - server:0
+#      - arg: "--node-taint=CriticalAddonsOnly=true:NoExecute"
+#        nodeFilters:
+#          - server:0
+    nodeLabels:
+      - label: ingress=true # same as `--k3s-node-label 'ingress=true@agent:0'` -> this results in a Kubernetes node label
+        nodeFilters:
+          - agent:0
+      - label: web=true # same as `--k3s-node-label 'web=true@agent:1'` -> this results in a Kubernetes node label
+        nodeFilters:
+          - agent:1
