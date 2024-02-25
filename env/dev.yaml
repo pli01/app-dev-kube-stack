@@ -1,0 +1,8 @@
+---
+#ingress_nginx:
+#  node_selector:
+#    ingress: "true"
+#    web: "true"
+
+whoami:
+  installed: true

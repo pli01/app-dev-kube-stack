@@ -1,1 +1,3 @@
-installed: false
+---
+whoami:
+  installed: false

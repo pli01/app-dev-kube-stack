@@ -1,14 +1,19 @@
+---
+bases:
+- environments.yaml
+---
 repositories:
 - name: ingress-nginx
   url: https://kubernetes.github.io/ingress-nginx
 
 releases:
 - name: ingress-nginx
-  namespace: ingress-nginx
-  createNamespace: true
   chart: ingress-nginx/ingress-nginx
-  version: v4.9.0
-  installed: true
+  version: {{ .Values.ingress_nginx.chart_version | quote }}
+  namespace: {{ .Values.ingress_nginx.ingress_namespace }}
+  createNamespace: true
+  installed: {{ .Values.ingress_nginx.installed }}
   values:
-    - ./values.yaml
-
+    # default values for helm chart
+    # # templated gotmpl values would also inherit the values
+    - values.yaml.gotmpl

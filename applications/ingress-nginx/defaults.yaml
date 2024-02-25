@@ -1,0 +1,9 @@
+---
+ingress_nginx:
+  chart_version: v4.9.1
+  installed: true
+  ingress_class: "nginx"
+  ingress_namespace: "ingress-nginx"
+  kind: "DaemonSet"
+  node_selector:
+    ingress: "true"

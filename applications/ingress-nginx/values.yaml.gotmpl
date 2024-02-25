@@ -1,0 +1,39 @@
+---
+rbac:
+  create: true
+
+controller:
+  ingressClassResource:
+    name: {{ .Values.ingress_nginx.ingress_class | quote }}
+  ingressClass: {{ .Values.ingress_nginx.ingress_class | quote }}
+  kind: {{ .Values.ingress_nginx.kind | quote }}
+  daemonset:
+    useHostNetwork: true
+    useHostPort: true
+  hostPort:
+    enabled: true
+  service:
+    enabled: true
+    type: NodePort
+  dnsPolicy: ClusterFirstWithHostNet
+  metrics:
+    enabled: false
+    serviceMonitor:
+      enabled: false
+  config:
+    use-forwarded-headers: "true"
+{{- if .Values.ingress_nginx.node_selector }}
+  nodeSelector: {{ toYaml .Values.ingress_nginx.node_selector | nindent 4 }}
+{{- end }}
+  admissionWebhooks:
+{{- if .Values.ingress_nginx.node_selector }}
+    patch: {{ toYaml .Values.ingress_nginx.node_selector | nindent 6 }}
+{{- end }}
+{{- if .Values.ingress_nginx.node_selector }}
+    nodeSelector: {{ toYaml .Values.ingress_nginx.node_selector | nindent 6 }}
+{{- end }}
+
+defaultBackend:
+{{- if .Values.ingress_nginx.node_selector }}
+  nodeSelector: {{ toYaml .Values.ingress_nginx.node_selector | nindent 4 }}
+{{- end }}

@@ -1,0 +1,5 @@
+---
+ingress_nginx:
+  installed: true
+whoami:
+  installed: false

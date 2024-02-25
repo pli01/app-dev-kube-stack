@@ -1,6 +1,8 @@
+---
 helmDefaults:
   atomic: true
   wait: true
+  verify: true
 
   # ---------------------  IMPORTANT ---------------------------
   # Uncomment the paths below for the applications that you'd like to manage.
@@ -13,9 +15,32 @@ helmDefaults:
   # For more information, reference the Helmfile repository at:
   # https://github.com/helmfile/helmfile
   # ------------------------------------------------------------
-
 helmfiles:
-  - path: applications/ingress-nginx/helmfile.yaml
-  - path: applications/whoami/helmfile.yaml
+- path: applications/ingress-nginx/helmfile.yaml
+  values:
+  - {{ toYaml .Values | nindent 4 }}
+- path: applications/whoami/helmfile.yaml
+  values:
+  - {{ toYaml .Values | nindent 4 }}
+#
+missingFileHandler: Warn
+  #
+# environment file
+#
+environments:
+  default:
     values:
-    - installed: true
+    - env/default.yaml
+  dev:
+    values:
+    - env/default.yaml
+    - env/{{ .Environment.Name }}.yaml
+#  stage:
+#    values:
+#    - env/default.yaml
+#    - env/{{ .Environment.Name }}.yaml
+#  prod:
+#    values:
+##    values:
+#    - env/default.yaml
+#    - env/{{ .Environment.Name }}.yaml
