@@ -4,5 +4,5 @@ bases:
 ---
 releases:
   - name: whoami
-    chart: ../../helm/whoami
+    chart: ../../charts/whoami
     installed: {{ .Values.whoami.installed }}

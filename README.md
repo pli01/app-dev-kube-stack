@@ -97,5 +97,5 @@ In following directories:
 - helmfile.yaml: applications configurations inventory to deploy
 - applications: helmfile application to deploy on kube cluster
 - demo files:
-  - helm: sample whoami demo helm charts
+  - charts: local helm charts
   - manifests: to install simple manifests (for demo)
