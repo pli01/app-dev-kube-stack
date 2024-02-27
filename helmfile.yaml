@@ -16,10 +16,11 @@ helmDefaults:
   # https://github.com/helmfile/helmfile
   # ------------------------------------------------------------
 helmfiles:
-- path: applications/ingress-nginx/helmfile.yaml
+- path: commons/repositories.yaml
+- path: applications/services_admin/helmfile.yaml
   values:
   - {{ toYaml .Values | nindent 4 }}
-- path: applications/whoami/helmfile.yaml
+- path: applications/services_1/whoami/helmfile.yaml
   values:
   - {{ toYaml .Values | nindent 4 }}
 #
@@ -27,20 +28,20 @@ missingFileHandler: Warn
   #
 # environment file
 #
-environments:
-  default:
-    values:
-    - env/default.yaml
-  dev:
-    values:
-    - env/default.yaml
-    - env/{{ .Environment.Name }}.yaml
-#  stage:
+#environments:
+#  default:
+#    values:
+#    - env/default.yaml
+#  dev:
 #    values:
 #    - env/default.yaml
 #    - env/{{ .Environment.Name }}.yaml
-#  prod:
-#    values:
+##  stage:
 ##    values:
-#    - env/default.yaml
-#    - env/{{ .Environment.Name }}.yaml
+##    - env/default.yaml
+##    - env/{{ .Environment.Name }}.yaml
+##  prod:
+##    values:
+###    values:
+##    - env/default.yaml
+##    - env/{{ .Environment.Name }}.yaml

@@ -1,0 +1,29 @@
+---
+bases:
+- ../../../commons/environments.yaml
+---
+releases:
+  #
+# ingress-nginx for web users apps
+#
+- name: {{ .Values.ingress_nginx.name | quote }}
+  chart: ingress-nginx/ingress-nginx
+  version: {{ .Values.ingress_nginx.chart_version | quote }}
+  namespace: {{ .Values.ingress_nginx.ingress_namespace }}
+  createNamespace: true
+  installed: {{ .Values.ingress_nginx.installed }}
+  values:
+    # default values for helm chart
+    # # templated gotmpl values would also inherit the values
+    - ingress-nginx-values.yaml.gotmpl
+#
+# ingress-nginx-admin for admin apps
+##
+- name: {{ .Values.ingress_nginx_admin.name | quote }}
+  chart: ingress-nginx/ingress-nginx
+  version: {{ .Values.ingress_nginx_admin.chart_version | quote }}
+  namespace: {{ .Values.ingress_nginx_admin.ingress_namespace }}
+  createNamespace: true
+  installed: {{ .Values.ingress_nginx_admin.installed }}
+  values:
+    - ingress-nginx-admin-values.yaml.gotmpl

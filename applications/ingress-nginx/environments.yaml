@@ -1,9 +1,0 @@
-environments:
-  default:
-    values:
-      - defaults.yaml
-  dev:
-    values:
-      - defaults.yaml
-# stage:
-# prod:

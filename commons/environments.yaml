@@ -1,0 +1,13 @@
+environments:
+  default:
+    values:
+      - defaults.yaml
+      - ../../../env/default.yaml
+      - ../../../env/{{ .Environment.Name }}.yaml
+  dev:
+    values:
+      - defaults.yaml
+      - env/default.yaml
+      - env/{{ .Environment.Name }}.yaml
+# stage:
+# prod:

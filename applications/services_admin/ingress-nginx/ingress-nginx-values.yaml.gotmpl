@@ -1,4 +1,10 @@
 ---
+{{- /*
+
+  See: https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
+
+*/ -}}
+
 rbac:
   create: true
 
@@ -22,18 +28,15 @@ controller:
       enabled: false
   config:
     use-forwarded-headers: "true"
-{{- if .Values.ingress_nginx.node_selector }}
-  nodeSelector: {{ toYaml .Values.ingress_nginx.node_selector | nindent 4 }}
+{{- if hasKey .Values.ingress_nginx "node_selector" }}
+  nodeSelector: {{ toYaml ((.Values).ingress_nginx).node_selector | nindent 4 }}
 {{- end }}
+{{- if hasKey .Values.ingress_nginx "node_selector" }}
   admissionWebhooks:
-{{- if .Values.ingress_nginx.node_selector }}
-    patch: {{ toYaml .Values.ingress_nginx.node_selector | nindent 6 }}
+    patch:
+      nodeSelector: {{ toYaml ((.Values).ingress_nginx).node_selector | nindent 8 }}
 {{- end }}
-{{- if .Values.ingress_nginx.node_selector }}
-    nodeSelector: {{ toYaml .Values.ingress_nginx.node_selector | nindent 6 }}
-{{- end }}
-
+{{- if hasKey .Values.ingress_nginx "node_selector" }}
 defaultBackend:
-{{- if .Values.ingress_nginx.node_selector }}
-  nodeSelector: {{ toYaml .Values.ingress_nginx.node_selector | nindent 4 }}
+  nodeSelector: {{ toYaml ((.Values).ingress_nginx).node_selector | nindent 4 }}
 {{- end }}

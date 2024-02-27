@@ -1,0 +1,6 @@
+---
+helmfiles:
+- path: ingress-nginx/helmfile.yaml
+  values:
+  - {{ toYaml .Values | nindent 4 }}
+

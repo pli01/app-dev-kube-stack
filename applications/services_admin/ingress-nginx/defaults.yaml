@@ -1,0 +1,23 @@
+---
+ingress_nginx:
+  chart_version: v4.9.1
+  name: "ingress-nginx"
+  installed: true
+  ingress_class: "nginx"
+  ingress_namespace: "ingress-nginx"
+  kind: "DaemonSet"
+#  node_selector:
+#    ingress: "true"
+#
+ingress_nginx_admin:
+  chart_version: v4.9.1
+  installed: true
+  ingress_class: "nginx-admin"
+  name: "ingress-nginx-admin"
+  ingress_namespace: "ingress-nginx-admin"
+  controller_value: "k8s.io/ingress-nginx-admin"
+  kind: "DaemonSet"
+  http: 81
+  https: 444
+#  node_selector:
+#    ingress-admin: "true"

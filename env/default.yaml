@@ -1,5 +1,13 @@
 ---
+#ingress_nginx: {}
 ingress_nginx:
-  installed: true
+#  installed: false
+  node_selector:
+    ingress: "true"
+ingress_nginx_admin:
+  #installed: false
+  node_selector:
+    web: "true"
+
 whoami:
-  installed: false
+  installed: true

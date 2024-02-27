@@ -8,10 +8,20 @@ metadata:
 servers: 1 # same as `--servers 1`
 agents: 2 # same as `--agents 2`
 ports:
+  ## Exposed port: 8080 for http users
   - port: 8080:80 # same as `--port '8080:80@loadbalancer'`
     nodeFilters:
       - loadbalancer
+  ## Exposed port: 8443 for https users
   - port: 8443:443
+    nodeFilters:
+      - loadbalancer
+  ## Exposed port: 8081 for http admin restricted apps
+  - port: 8081:81
+    nodeFilters:
+      - loadbalancer
+  ## Exposed port: 8444 for https admin restricted apps
+  - port: 8444:444
     nodeFilters:
       - loadbalancer
 registries: # define how registries should be created or used

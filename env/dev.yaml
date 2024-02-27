@@ -1,8 +1,7 @@
 ---
-#ingress_nginx:
-#  node_selector:
-#    ingress: "true"
-#    web: "true"
+ingress_nginx:
+  node_selector:
+    web: "true"
 
 whoami:
   installed: true

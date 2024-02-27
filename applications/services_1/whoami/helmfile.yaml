@@ -1,8 +1,8 @@
 ---
 bases:
-- environments.yaml
+- ../../../commons/environments.yaml
 ---
 releases:
   - name: whoami
-    chart: ../../charts/whoami
+    chart: ../../../charts/whoami
     installed: {{ .Values.whoami.installed }}
