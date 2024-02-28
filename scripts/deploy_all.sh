@@ -3,7 +3,7 @@
 # deploy cluster and applications
 #
 set -eu -o pipefail
-K3D_CONFIG="${K3D_CONFIG:-k3d/kube-multiple-agent-ingress-nginx/k3d.yml}"
+K3D_CONFIG="${K3D_CONFIG:-clusters/k3d/kube-multiple-agent-no-default-ingress/k3d.yml}"
 #
 # registry data on volume
 export REGISTRY_DIR="${REGISTRY_DIR:-registry-data}"

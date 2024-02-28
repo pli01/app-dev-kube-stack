@@ -4,7 +4,7 @@
 apiVersion: k3d.io/v1alpha5 # this will change in the future as we make everything more stable
 kind: Simple # internally, we also have a Cluster config, which is not yet available externally
 metadata:
-  name: devcluster # name that you want to give to your cluster (will still be prefixed with `k3d-`)
+  name: dev # name that you want to give to your cluster (will still be prefixed with `k3d-`)
 servers: 1 # same as `--servers 1`
 agents: 2 # same as `--agents 2`
 ports:
