@@ -9,5 +9,15 @@ ingress_nginx_admin:
   node_selector:
     web: "true"
 
-whoami:
-  installed: true
+loki:
+#  installed: false
+  node_selector:
+    ingress: "true"
+
+prometheus:
+  #  installed: false
+  node_selector:
+    ingress: "true"
+
+#whoami:
+#  installed: true

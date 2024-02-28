@@ -64,3 +64,5 @@ helmfile sync
 helmfile apply
 helmfile destroy
 ```
+
+- to install crds at first time, use `helmfile sync`

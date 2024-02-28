@@ -1,0 +1,29 @@
+---
+bases:
+- ../../../commons/environments.yaml
+---
+releases:
+- name: loki
+  chart: grafana/loki
+  version: {{ .Values.loki | get "chart_version" nil | quote }}
+  namespace: {{ .Values.loki.namespace }}
+  createNamespace: true
+  installed: {{ .Values.loki.installed }}
+  values:
+    - loki-values.yaml.gotmpl
+- name: prometheus
+  chart: prometheus-community/kube-prometheus-stack
+  version: {{ .Values.prometheus | get "chart_version" nil | quote }}
+  namespace: {{ .Values.prometheus.namespace }}
+  createNamespace: true
+  installed: {{ .Values.prometheus.installed }}
+  values:
+    - prometheus-values.yaml.gotmpl
+- name: promtail
+  chart: grafana/promtail
+  version: {{ .Values.promtail | get "chart_version" nil | quote }}
+  namespace: {{ .Values.promtail.namespace }}
+  createNamespace: true
+  installed: {{ .Values.promtail.installed }}
+  values:
+    - promtail-values.yaml.gotmpl

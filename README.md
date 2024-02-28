@@ -45,7 +45,7 @@ Requirements: must be installed
 - curl
 - docker > v20.10.5 (see  https://k3d.io/v5.6.0/#requirements)
 
-1. first install all requirements (k3d,helmfile,..), using the script:
+1. First, use the script to install all requirements (k3d,helmfile,helm,kubectl..):
 ```
 scripts/install_prereq.sh
 ```
@@ -56,6 +56,10 @@ scripts/deploy_all.sh
 ```
 
 3. Develop your app, test, have fun !
+
+```
+helmfile apply
+```
 
 4. At the end, destroy all ressources and local cluster. That's all folks
 ```
@@ -93,9 +97,9 @@ scripts/install_prereq.sh
 
 In following directories:
 - scripts: script to install prereq, deploy/destroy all ressources
-- k3d: configuration file to create/use/destroy local kubernetes cluster
+- clusters/k3d: configuration file to create/use/destroy local kubernetes cluster
 - helmfile.yaml: applications configurations inventory to deploy
 - applications: helmfile application to deploy on kube cluster
-- demo files:
+- addons files:
   - charts: local helm charts
   - manifests: to install simple manifests (for demo)

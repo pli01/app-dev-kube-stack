@@ -22,7 +22,8 @@ kubectl get pod -A
 
 echo "# Deploy application in cluster"
 export HELM_DIFF_THREE_WAY_MERGE=true
+helmfile sync --wait
 helmfile apply --wait
 
-echo "# Test whoami url"
-curl http://localhost:8080
+#echo "# Test whoami url"
+#curl http://localhost:8080

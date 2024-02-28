@@ -4,3 +4,6 @@ helmfiles:
   values:
   - {{ toYaml .Values | nindent 4 }}
 
+- path: observability/helmfile.yaml
+  values:
+  - {{ toYaml .Values | nindent 4 }}

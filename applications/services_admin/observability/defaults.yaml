@@ -1,0 +1,21 @@
+---
+loki:
+  chart_version: 5.43.3
+  installed: true
+  namespace: "loki"
+  #node_selector:
+  #  web: "true"
+prometheus:
+  chart_version: 56.14.0
+  installed: true
+  namespace: "monitoring"
+  grafana_hostname: grafana.127.0.0.1.nip.io
+  alertmanager_hostname: alertmanager.127.0.0.1.nip.io
+  prometheus_hostname: prometheus.127.0.0.1.nip.io
+  #node_selector:
+  #  web: "true"
+  ingress_class: nginx-admin
+promtail:
+  chart_version: 6.15.5
+  installed: true
+  namespace: "promtail"
