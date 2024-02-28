@@ -24,10 +24,10 @@ prometheus:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
       - {{ .Values.prometheus.prometheus_hostname | quote }}
-    paths: ['/']
+    paths: ['/prometheus'] # does not need regex capture like others
   prometheusSpec:
-    externalUrl: "http://{{ .Values.prometheus.prometheus_hostname }}"
-    routePrefix: /
+    externalUrl: "http://{{ .Values.prometheus.prometheus_hostname }}/prometheus"
+    routePrefix: /prometheus
 {{- if hasKey .Values.prometheus "node_selector" }}
     nodeSelector: {{ toYaml ((.Values).prometheus).node_selector | nindent 6 }}
 {{- end }}
@@ -38,11 +38,13 @@ alertmanager:
     ingressClassName: {{ .Values.prometheus.ingress_class | quote }}
     annotations:
       kubernetes.io/ingress.class: {{ .Values.prometheus.ingress_class | quote }}
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
       - {{ .Values.prometheus.alertmanager_hostname | quote }}
+    paths: ['/alertmanager(/|$)(.*)']
   alertmanagerSpec:
-    externalUrl: "http://{{ .Values.prometheus.alertmanager_hostname }}"
+    externalUrl: "http://{{ .Values.prometheus.alertmanager_hostname }}/alertmanager"
     routePrefix: /
 {{- if hasKey .Values.prometheus "node_selector" }}
     nodeSelector: {{ toYaml ((.Values).prometheus).node_selector | nindent 6 }}
@@ -54,9 +56,15 @@ grafana:
     ingressClassName: {{ .Values.prometheus.ingress_class | quote }}
     annotations:
       kubernetes.io/ingress.class: {{ .Values.prometheus.ingress_class | quote }}
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+      nginx.ingress.kubernetes.io/use-regex: "true"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
       - {{ .Values.prometheus.grafana_hostname | quote }}
+    path: "/grafana(/|$)(.*)"
+  env:
+    GF_SERVER_ROOT_URL: "http://localhost:3000/grafana/"
+    GF_SERVER_SERVE_FROM_SUB_PATH: "false"
 {{- if hasKey .Values.prometheus "node_selector" }}
   nodeSelector: {{ toYaml ((.Values).prometheus).node_selector | nindent 4 }}
 {{- end }}

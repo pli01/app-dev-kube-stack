@@ -10,8 +10,11 @@ prometheus:
   installed: true
   namespace: "monitoring"
   grafana_hostname: grafana.127.0.0.1.nip.io
-  alertmanager_hostname: alertmanager.127.0.0.1.nip.io
-  prometheus_hostname: prometheus.127.0.0.1.nip.io
+  alertmanager_hostname: grafana.127.0.0.1.nip.io
+  prometheus_hostname: grafana.127.0.0.1.nip.io
+#  grafana_hostname: grafana.127.0.0.1.nip.io
+#  alertmanager_hostname: alertmanager.127.0.0.1.nip.io
+#  prometheus_hostname: prometheus.127.0.0.1.nip.io
   #node_selector:
   #  web: "true"
   ingress_class: nginx-admin
